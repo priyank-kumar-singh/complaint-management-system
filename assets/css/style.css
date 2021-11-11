@@ -1,0 +1,234 @@
+.avatar {
+  align-items: center;
+  border-radius: 50%;
+  display: flex;
+  font-size: x-large;
+  padding-left: 13px;
+  width: 50px;
+  height: 50px;
+}
+
+.avatar.avatar-stick-top {
+  position: absolute;
+  margin-top: 2rem;
+  margin-left: 4rem;
+}
+
+.avatar.avatar-top {
+  position: absolute;
+  margin-top: -4rem;
+  margin-left: 4rem;
+}
+
+.avatar.fa {
+  color: #2e5e88;
+  background-color: #fff;
+}
+
+.avatar:hover {
+  cursor: pointer;
+  background-color: #E1E8E3;
+  border-color: #D4C32A;
+}
+
+.avatar.fa:hover {
+  color: #2e5eaf;
+}
+
+.box {
+  display: inline-block;
+  padding: 0.2rem 0.6rem 0.4rem;
+  margin: 0 1rem;
+  color: #606060;
+}
+
+.btn-theme {
+  color: #fff;
+  background-color: #2e5e88;
+  border-color: #68dff0;
+}
+.btn-theme:hover,
+.btn-theme:focus,
+.btn-theme:active,
+.btn-theme.active,
+.open .dropdown-toggle.btn-theme {
+  color: #fff;
+  background-color: #4892D4;
+  border-color: #68dff0;
+}
+
+.btn-block {
+  display: block;
+  width: 100%;
+}
+
+.card-text {
+  text-align: justify;
+}
+
+#card-items {
+  display: flex;
+  justify-content: center;
+  margin: 8% auto;
+}
+
+.clickable-row {
+  cursor: pointer;
+}
+
+.forgot-password {
+  position: relative;
+  display: block;
+}
+
+.forgot-password .hyperlink {
+  float: right;
+  margin: 10px 0;
+}
+
+.hyperlink {
+  color: #428bca;
+  text-decoration: none;
+  outline: none;
+}
+
+header .navbar {
+  background-color: #2e5e88;
+}
+
+hr {
+  margin: 20px 0;
+  border: 0;
+  border-top: 1px solid #797979;
+}
+
+.main-content {
+  margin: 5rem 0;
+}
+
+.main-content .main-content-headers {
+  margin: 0 0 1rem;
+  padding-top: 1rem;
+}
+
+.main-content .main-content-headers .col.btn {
+  margin-left: 2rem;
+}
+
+.margin-right {
+  margin-right: 2rem !important;
+}
+
+.margin-left {
+  margin-left: 2rem !important;
+}
+
+.margin-left-none {
+  margin-left: 0 !important;
+}
+
+.margin-right-none {
+  margin-right: 0 !important;
+}
+
+.main-content .main-content-headers-2 {
+  color: #505050;
+  font-size: xx-large;
+  font-weight: 700;
+  margin-top: 2rem;
+  margin-bottom: -0.8rem;
+}
+
+.main-content .btn {
+  color: #fff;
+}
+
+.main-content hr {
+  margin: 20px 0 0;
+}
+
+/* Navigation Bar Profile Menu */
+.profile {
+  margin: 0.8rem;
+  padding: 1rem;
+  width: 330px;
+  text-align: center;
+}
+
+.profile .profile-item {
+  margin: 5px 0 0;
+}
+
+.profile-item.image {
+  margin: -5px 0 0;
+  width: 120px;
+  height: 120px;
+}
+
+.profile-item.username {
+  font-weight: 700;
+}
+
+.profile-item.email {
+  margin: -3px 0 0;
+  color: #606060;
+}
+
+.profile-item.designation {
+  margin: 8px 0 -8px;
+  color: #606060;
+}
+
+.profile-item.department {
+  color: #606060;
+}
+
+.profile-item.uid, .profile-item.mobile {
+  color: grey;
+}
+
+.profile-item.profile-btn {
+  margin: -5px 0 0;
+  width: 230px;
+}
+
+/*LOGIN CONFIGURATION PAGE*/
+.form-login {
+	max-width: 330px;
+	margin: 100px auto 0;
+	background: #fff;
+	border-radius: 5px;
+	-webkit-border-radius: 5px;
+}
+
+.form-login.form-register {
+  max-width: 550px;
+  margin: 80px auto 0;
+}
+
+.form-login h2.form-login-heading {
+	margin: 0;
+	padding: 25px 20px;
+	text-align: center;
+	background: #2e5e88;
+	border-radius: 5px 5px 0 0;
+	-webkit-border-radius: 5px 5px 0 0;
+	color: #fff;
+	font-size: 20px;
+	text-transform: uppercase;
+	font-weight: 300;
+}
+
+.login-wrap {
+	padding: 20px;
+}
+
+.login-wrap .registration {
+	text-align: center;
+}
+
+.login-social-link {
+	display: block;
+	margin-top: 20px;
+	margin-bottom: 15px;
+}
