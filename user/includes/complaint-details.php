@@ -2,7 +2,7 @@
 $ret = mysqli_query($sql, "SELECT * FROM complaints WHERE id='" . $_COOKIE['cmpid'] . "'");
 $row = mysqli_fetch_assoc($ret);
 
-$uret = mysqli_query($sql, "SELECT * FROM users WHERE uid='" . $row['userId'] . "'");
+$uret = mysqli_query($sql, "SELECT * FROM " . $_COOKIE['type'] . " WHERE uid='" . $row['userId'] . "'");
 $user = mysqli_fetch_assoc($uret);
 ?>
 
@@ -10,6 +10,8 @@ $user = mysqli_fetch_assoc($uret);
     <div class="main-content-headers-2" style="padding: 0;">
         User Details
         <?php
+        $downBtn = '<a id="download-report" style="float: right; margin-left: 20px;" href="#" title="Download"><i class="fa fa-download"></i></a>';
+        echo $downBtn;
         if ($row['status'] == 0) {
             echo '<a id="delete-comp" style="float: right; margin-left: 20px;" href="includes/complaint-delete.php" title="Withdraw Complaint"><i class="fa fa-trash-o"></i></a>';
             echo '<a style="float: right;" href="edit.php" title="Edit Complaint"><i class="fa fa-edit"></i></a>';
@@ -174,5 +176,28 @@ $user = mysqli_fetch_assoc($uret);
         if (yes) {
             window.document.location = "includes/complaint-delete.php";
         }
+    });
+    document.getElementById('download-report').addEventListener("click", function(e) {
+        e.preventDefault();
+        downloadReport({
+            complaints: [{
+                uid: "<?php echo $user['uid'] ?>",
+                firstname: "<?php echo $user['firstname']; ?>",
+                lastname: "<?php echo $user['lastname']; ?>",
+                department: "<?php echo $user['department']; ?>",
+                designation: "<?php echo $user['designation']; ?>",
+                gender: "<?php echo $user['gender']; ?>",
+                mobile: "<?php echo $user['mobile']; ?>",
+                email: "<?php echo $user['email']; ?>",
+                cid: "<?php echo $row['id']; ?>",
+                category: "<?php echo $row['category']; ?>",
+                type: "<?php echo $row['type']; ?>",
+                details: "<?php echo $row['details']; ?>",
+                status: "<?php echo $row['status']; ?>",
+                remarks: "<?php echo $row['remarks']; ?>",
+                added: "<?php echo $row['added']; ?>",
+                updated: "<?php echo $row['updated']; ?>",
+            }, ],
+        });
     });
 </script>

@@ -19,13 +19,12 @@ if (isset($_POST['submit'])) {
     $password = md5($_POST['password']);
     $type = $_COOKIE['type'];
 
-    console_log('XX'.$designation);
-
     if ($designation == "") {
         $designation = 'student';
     }
 
-    $ret = mysqli_query($sql, "insert into users(uid, firstname, lastname, department, designation, gender, mobile, email, password) values('$uid', '$firstname','$lastname', '$department', '$designation', '$gender', '$mobile', '$email', '$password')");
+    $pret = mysqli_query($sql, "insert into users(email, password, type) values('$email', '$password', '$type')");
+    $ret = mysqli_query($sql, "insert into $type(uid, firstname, lastname, department, designation, gender, mobile, email) values('$uid', '$firstname','$lastname', '$department', '$designation', '$gender', '$mobile', '$email')");
 
     if ($ret) {
         $_SESSION['uid'] = $uid;
@@ -33,9 +32,9 @@ if (isset($_POST['submit'])) {
         $_SESSION['type'] = $type;
         $_SESSION['fname'] = $firstname;
         $_SESSION['lname'] = $lastname;
-        $_SESSION['dep'] = $department;
-        $_SESSION['desig'] = $designation;
-        $_SESSION['tel'] = $mobile;
+        $_SESSION['dept'] = $department;
+        $_SESSION['designation'] = $designation;
+        $_SESSION['mobile'] = $mobile;
 
         $host = $_SERVER['HTTP_HOST'];
         $uip = $_SERVER['REMOTE_ADDR'];

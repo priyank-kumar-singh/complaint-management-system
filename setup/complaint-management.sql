@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 11, 2021 at 10:19 PM
+-- Generation Time: Nov 12, 2021 at 07:27 AM
 -- Server version: 10.4.19-MariaDB
 -- PHP Version: 8.0.6
 
@@ -20,6 +20,30 @@ SET time_zone = "+00:00";
 --
 -- Database: `complaint-management`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `administrator`
+--
+
+CREATE TABLE `administrator` (
+  `uid` varchar(12) NOT NULL,
+  `firstname` varchar(20) NOT NULL,
+  `lastname` varchar(20) NOT NULL,
+  `department` varchar(8) NOT NULL,
+  `designation` varchar(20) DEFAULT 'administrator',
+  `gender` varchar(2) NOT NULL,
+  `mobile` varchar(12) NOT NULL,
+  `email` varchar(30) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `administrator`
+--
+
+INSERT INTO `administrator` (`uid`, `firstname`, `lastname`, `department`, `designation`, `gender`, `mobile`, `email`) VALUES
+('admin101', 'PRIYANK', 'KUMAR SINGH', 'CSE', 'administrator', 'M', '1234567890', 'admin.priyank@mail.com');
 
 -- --------------------------------------------------------
 
@@ -57,19 +81,63 @@ INSERT INTO `complaints` (`id`, `userId`, `userType`, `category`, `type`, `detai
 -- --------------------------------------------------------
 
 --
--- Table structure for table `users`
+-- Table structure for table `faculty`
 --
 
-CREATE TABLE `users` (
+CREATE TABLE `faculty` (
   `uid` varchar(12) NOT NULL,
   `firstname` varchar(20) NOT NULL,
   `lastname` varchar(20) NOT NULL,
   `department` varchar(8) NOT NULL,
-  `designation` varchar(20) DEFAULT NULL,
+  `designation` varchar(20) NOT NULL,
   `gender` varchar(2) NOT NULL,
   `mobile` varchar(12) NOT NULL,
+  `email` varchar(30) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `faculty`
+--
+
+INSERT INTO `faculty` (`uid`, `firstname`, `lastname`, `department`, `designation`, `gender`, `mobile`, `email`) VALUES
+('jtembhurne', 'JITENDRA', 'TEMBHURNE', 'CSE', 'Head of Department', 'M', '1234567890', 'jtembhurne@mail.com');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `student`
+--
+
+CREATE TABLE `student` (
+  `uid` varchar(12) NOT NULL,
+  `firstname` varchar(20) NOT NULL,
+  `lastname` varchar(20) NOT NULL,
+  `department` varchar(8) NOT NULL,
+  `designation` varchar(20) NOT NULL,
+  `gender` varchar(2) NOT NULL,
+  `mobile` varchar(12) NOT NULL,
+  `email` varchar(30) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `student`
+--
+
+INSERT INTO `student` (`uid`, `firstname`, `lastname`, `department`, `designation`, `gender`, `mobile`, `email`) VALUES
+('BT19CSE044', 'RAGHAV', 'AGRAWAL', 'CSE', 'student', 'M', '1234567890', 'raghav@mail.com'),
+('BT19CSE090', 'PRIYANK', 'KUMAR SINGH', 'CSE', 'student', 'M', '1234567890', 'priyank@mail.com'),
+('BT19CSE125', 'AMAN', 'VERMA', 'CSE', 'student', 'M', '1234567890', 'aman@mail.com');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `users`
+--
+
+CREATE TABLE `users` (
   `email` varchar(30) NOT NULL,
   `password` varchar(100) NOT NULL,
+  `type` varchar(14) NOT NULL,
   `registered` datetime NOT NULL DEFAULT current_timestamp(),
   `last_access` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -78,16 +146,23 @@ CREATE TABLE `users` (
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`uid`, `firstname`, `lastname`, `department`, `designation`, `gender`, `mobile`, `email`, `password`, `registered`, `last_access`) VALUES
-('admin101', 'PRIYANK', 'KUMAR SINGH', 'CSE', 'admin', 'M', '1234567890', 'admin.priyank@mail.com', '2c9341ca4cf3d87b9e4eb905d6a3ec45', '2021-11-12 02:39:19', '2021-11-12 02:39:19'),
-('BT19CSE044', 'RAGHAV', 'AGRAWAL', 'CSE', 'student', 'M', '1234567890', 'raghav@mail.com', '2c9341ca4cf3d87b9e4eb905d6a3ec45', '2021-11-12 02:43:16', '2021-11-12 02:43:16'),
-('BT19CSE090', 'PRIYANK', 'KUMAR SINGH', 'CSE', 'student', 'M', '1234567890', 'priyank@mail.com', '2c9341ca4cf3d87b9e4eb905d6a3ec45', '2021-11-10 05:00:00', '2021-11-12 02:41:35'),
-('BT19CSE125', 'AMAN', 'VERMA', 'CSE', 'student', 'M', '1234567890', 'aman@mail.com', '2c9341ca4cf3d87b9e4eb905d6a3ec45', '2021-11-10 10:00:00', '2021-11-12 02:42:34'),
-('jtembhurne', 'JITENDRA', 'TEMBHURNE', 'CSE', 'Head of Department', 'M', '1234567890', 'jtembhurne@mail.com', '2c9341ca4cf3d87b9e4eb905d6a3ec45', '2021-11-11 17:58:02', '2021-11-12 01:17:54');
+INSERT INTO `users` (`email`, `password`, `type`, `registered`, `last_access`) VALUES
+('admin.priyank@mail.com', '2c9341ca4cf3d87b9e4eb905d6a3ec45', 'administrator', '2021-11-12 10:20:24', '2021-11-12 10:20:24'),
+('aman@mail.com', '2c9341ca4cf3d87b9e4eb905d6a3ec45', 'student', '2021-11-12 10:19:19', '2021-11-12 11:45:36'),
+('jtembhurne@mail.com', '2c9341ca4cf3d87b9e4eb905d6a3ec45', 'faculty', '2021-11-12 10:19:59', '2021-11-12 11:46:17'),
+('priyank@mail.com', '2c9341ca4cf3d87b9e4eb905d6a3ec45', 'student', '2021-11-12 10:12:40', '2021-11-12 11:46:32'),
+('raghav@mail.com', '2c9341ca4cf3d87b9e4eb905d6a3ec45', 'student', '2021-11-12 10:19:19', '2021-11-12 10:19:19');
 
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `administrator`
+--
+ALTER TABLE `administrator`
+  ADD PRIMARY KEY (`uid`),
+  ADD UNIQUE KEY `email` (`email`);
 
 --
 -- Indexes for table `complaints`
@@ -96,11 +171,24 @@ ALTER TABLE `complaints`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `faculty`
+--
+ALTER TABLE `faculty`
+  ADD PRIMARY KEY (`uid`),
+  ADD UNIQUE KEY `email` (`email`);
+
+--
+-- Indexes for table `student`
+--
+ALTER TABLE `student`
+  ADD PRIMARY KEY (`uid`),
+  ADD UNIQUE KEY `email` (`email`);
+
+--
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
-  ADD PRIMARY KEY (`uid`),
-  ADD UNIQUE KEY `email` (`email`);
+  ADD PRIMARY KEY (`email`);
 
 --
 -- AUTO_INCREMENT for dumped tables

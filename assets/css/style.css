@@ -115,22 +115,6 @@ hr {
   margin-left: 2rem;
 }
 
-.margin-right {
-  margin-right: 2rem !important;
-}
-
-.margin-left {
-  margin-left: 2rem !important;
-}
-
-.margin-left-none {
-  margin-left: 0 !important;
-}
-
-.margin-right-none {
-  margin-right: 0 !important;
-}
-
 .main-content .main-content-headers-2 {
   color: #505050;
   font-size: xx-large;
@@ -139,8 +123,12 @@ hr {
   margin-bottom: -0.8rem;
 }
 
-.main-content .btn {
+.main-content .btn, .main-content .btn-text:hover {
   color: #fff;
+}
+
+.main-content .btn-text {
+  color: #505050;
 }
 
 .main-content hr {

@@ -2,13 +2,12 @@
 $ret = mysqli_query($sql, "SELECT * FROM complaints WHERE id='" . $_COOKIE['cmpid'] . "'");
 $row = mysqli_fetch_assoc($ret);
 
-$uret = mysqli_query($sql, "SELECT * FROM users WHERE uid='" . $row['userId'] . "'");
+$uret = mysqli_query($sql, "SELECT * FROM " . $row['userType'] . " WHERE uid='" . $row['userId'] . "'");
 $user = mysqli_fetch_assoc($uret);
-
 
 if (isset($_POST['submit'])) {
     console_log($_POST['remarks']);
-    $query = "UPDATE complaints SET remarks='".$_POST['remarks']."', updated=current_timestamp(), status=1 WHERE id='" . $_COOKIE['cmpid'] . "'";
+    $query = "UPDATE complaints SET remarks='" . $_POST['remarks'] . "', updated=current_timestamp(), status=1 WHERE id='" . $_COOKIE['cmpid'] . "'";
     $ret = mysqli_query($sql, $query);
 
     console_log($ret);
@@ -17,27 +16,27 @@ if (isset($_POST['submit'])) {
     } else {
         $errormsg = 'Operation Failed';
     }
-
 }
 
 ?>
 
 <div class="main-content">
     <form name="remark-complaint" method="post">
-            <?php
-                if ($errormsg) {
-                    echo "<span style='padding-left:4%; padding-top:2%;  color:red'> Operation Failed </span><br><br>";
-                } else if ($msg) {
-                    echo "<span style='padding-left:4%; padding-top:2%;  color:green'> Complaint Closed. Refresh Page to See Changes. </span><br><br>";
-                }
-            ?>
+        <?php
+        if ($errormsg) {
+            echo "<span style='padding-left:4%; padding-top:2%;  color:red'> Operation Failed </span><br><br>";
+        } else if ($msg) {
+            echo "<span style='padding-left:4%; padding-top:2%;  color:green'> Complaint Closed. Refresh Page to See Changes. </span><br><br>";
+        }
+        ?>
         <div class="main-content-headers-2" style="padding: 0;">
             User Details
             <?php
             if ($row['status'] == 0) {
-                echo '<button name="submit" style="float: right;" class="btn btn-secondary"><i class="fa fa-save"></i> &nbsp;Save and Mark Close</a>';
+                echo '<button name="submit" style="float: right; margin-left: 8px" class="btn btn-secondary"><i class="fa fa-save"></i> &nbsp;Save and Mark Close</a>';
             }
             ?>
+            <button id="download-report" name="download" style="float: right;" class="btn btn-outline-secondary btn-text"><i class="fa fa-download"></i> &nbsp; Download Report</button>
         </div>
         <br><br>
         <div class="row g-3">
@@ -197,3 +196,29 @@ if (isset($_POST['submit'])) {
         </div>
     </form>
 </div>
+
+<script>
+    document.getElementById('download-report').addEventListener("click", function(e) {
+        e.preventDefault();
+        downloadReport({
+            complaints: [{
+                uid: "<?php echo $user['uid'] ?>",
+                firstname: "<?php echo $user['firstname']; ?>",
+                lastname: "<?php echo $user['lastname']; ?>",
+                department: "<?php echo $user['department']; ?>",
+                designation: "<?php echo $user['designation']; ?>",
+                gender: "<?php echo $user['gender']; ?>",
+                mobile: "<?php echo $user['mobile']; ?>",
+                email: "<?php echo $user['email']; ?>",
+                cid: "<?php echo $row['id']; ?>",
+                category: "<?php echo $row['category']; ?>",
+                type: "<?php echo $row['type']; ?>",
+                details: "<?php echo $row['details']; ?>",
+                status: "<?php echo $row['status']; ?>",
+                remarks: "<?php echo $row['remarks']; ?>",
+                added: "<?php echo $row['added']; ?>",
+                updated: "<?php echo $row['updated']; ?>",
+            }, ],
+        });
+    });
+</script>

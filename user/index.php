@@ -8,39 +8,36 @@ if ($_SESSION['type'] == $_COOKIE['type']) {
 }
 
 if (isset($_POST['submit'])) {
-    $query = "SELECT * FROM users WHERE email='" . $_POST['email'] . "' AND password='" . md5($_POST['password']);
-    if ($_COOKIE['type'] == 'student') {
-        $query .= "' AND designation='student'";
-    } else if ($_COOKIE['type'] == 'faculty') {
-        $query .= "' AND NOT designation='student' AND NOT designation='admin'";
-    } else {
-        $query .= "' AND designation='admin'";
-    }
+    $email = $_POST['email'];
+    $password = md5($_POST['password']);
+    $type = $_COOKIE['type'];
 
-    $ret = mysqli_query($sql, $query);
+    console_log($_POST['email'] . ' ' . $_POST['password'] . ' ' . $_COOKIE['type']);
+    $ret = mysqli_query($sql,  "SELECT * FROM users WHERE email='$email' AND password='$password' AND type='$type'");
     $num = mysqli_fetch_array($ret);
 
     if ($num > 0) {
-        $_SESSION['uid'] = $num['uid'];
-        $pret = mysqli_query($sql, "UPDATE users SET last_access=current_timestamp() WHERE uid='" . $_SESSION['uid'] . "'");
-        if ($pret) {
-            $_SESSION['email'] = $_POST['email'];
-            $_SESSION['type'] = $_COOKIE['type'];
-            $_SESSION['fname'] = $num['firstname'];
-            $_SESSION['lname'] = $num['lastname'];
-            $_SESSION['dep'] = $num['department'];
-            $_SESSION['desig'] = $num['designation'];
-            $_SESSION['tel'] = $num['mobile'];
+        console_log("I am in 3");
+        $uret = mysqli_query($sql, "SELECT * FROM " . $_COOKIE['type'] . " WHERE email='" . $_POST['email'] . "'");
+        $pret = mysqli_query($sql, "UPDATE users SET last_access=current_timestamp() WHERE email='" . $_POST['email'] . "'");
 
-            $host = $_SERVER['HTTP_HOST'];
-            $uip = $_SERVER['REMOTE_ADDR'];
-            $extra = "dashboard.php";
-            $uri = rtrim(dirname($_SERVER['PHP_SELF']), '/\\');
-            header("location:http://$host$uri/$extra");
-            exit();
-        } else {
-            $errormsg = "Unknown Error";
-        }
+        $user = mysqli_fetch_assoc($uret);
+
+        $_SESSION['uid'] = $user['uid'];
+        $_SESSION['email'] = $_POST['email'];
+        $_SESSION['type'] = $_COOKIE['type'];
+        $_SESSION['fname'] = $user['firstname'];
+        $_SESSION['lname'] = $user['lastname'];
+        $_SESSION['dept'] = $user['department'];
+        $_SESSION['designation'] = $user['designation'];
+        $_SESSION['mobile'] = $user['mobile'];
+
+        $host = $_SERVER['HTTP_HOST'];
+        $uip = $_SERVER['REMOTE_ADDR'];
+        $extra = "dashboard.php";
+        $uri = rtrim(dirname($_SERVER['PHP_SELF']), '/\\');
+        header("location:http://$host$uri/$extra");
+        exit();
     } else {
         $errormsg = "Invalid username or password";
     }

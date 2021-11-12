@@ -3,9 +3,9 @@ $email = $_SESSION['email'];
 $uid   = $_SESSION['uid'];
 $fname = $_SESSION['fname'];
 $lname = $_SESSION['lname'];
-$dep = $_SESSION['dep'];
-$desig = $_SESSION['desig'];
-$tel = $_SESSION['tel'];
+$dep = $_SESSION['dept'];
+$designation = $_SESSION['designation'];
+$tel = $_SESSION['mobile'];
 $type = $_COOKIE['type'];
 ?>
 
@@ -19,7 +19,7 @@ $type = $_COOKIE['type'];
     const name = '<?php echo $fname; ?>' + ' ' + '<?php echo $lname; ?>';
     const email = '<?php echo $email; ?>';
     let dep = '<?php echo $dep; ?>';
-    const desig = '<?php echo $desig; ?>';
+    const designation = '<?php echo $designation; ?>';
     const tel = '<?php echo $tel; ?>';
 
     let image = 'user-s.png';
@@ -27,7 +27,7 @@ $type = $_COOKIE['type'];
         image = 'user-f.png';
     } else if ('<?php echo $type; ?>' === 'administrator') {
         image = 'user-a.png';
-        desig = 'Administrator';
+        designation = 'Administrator';
     }
 
     if (dep == 'CSE') {
@@ -51,7 +51,7 @@ $type = $_COOKIE['type'];
             <div class="profile-item email"> ${email} </div>
             <?php
                 if ($_COOKIE['type'] != 'student') {
-                    echo '<div class="profile-item designation"> ${desig} </div>';
+                    echo '<div class="profile-item designation"> ${designation} </div>';
                 }
             ?>
             <div class="profile-item department"> ${dep} </div>
