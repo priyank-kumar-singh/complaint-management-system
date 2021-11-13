@@ -24,9 +24,9 @@ if (isset($_POST['submit'])) {
     }
 
     $pret = mysqli_query($sql, "insert into users(email, password, type) values('$email', '$password', '$type')");
-    $ret = mysqli_query($sql, "insert into $type(uid, firstname, lastname, department, designation, gender, mobile, email) values('$uid', '$firstname','$lastname', '$department', '$designation', '$gender', '$mobile', '$email')");
 
-    if ($ret) {
+    if ($pret) {
+        $ret = mysqli_query($sql, "insert into $type(uid, firstname, lastname, department, designation, gender, mobile, email) values('$uid', '$firstname','$lastname', '$department', '$designation', '$gender', '$mobile', '$email')");
         $_SESSION['uid'] = $uid;
         $_SESSION['email'] = $email;
         $_SESSION['type'] = $type;

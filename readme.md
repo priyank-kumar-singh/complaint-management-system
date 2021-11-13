@@ -3,7 +3,7 @@
 How to run-
 1. Install XAMPP
 2. Run MySQL and Apache Server
-3. Paste this folder inside XAMPP/htdocs/
+3. Paste this folder content inside XAMPP/htdocs/cms
 4. Go to <a href="http://localhost/phpmyadmin">localhost/phpmyadmin/</a> and create a new database namely "complaint-management" then import the sql file from setup folder
 4. To run the application go to <a href="http://localhost/cms">localhost/cms/</a>
 

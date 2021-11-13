@@ -6,4 +6,5 @@
     $sql = mysqli_connect($host, $user, $password, $database) or die("Could not connect database");
 
     include("functions.php");
+    header('Access-Control-Allow-Origin: *');
 ?>

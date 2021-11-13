@@ -12,12 +12,10 @@ if (isset($_POST['submit'])) {
     $password = md5($_POST['password']);
     $type = $_COOKIE['type'];
 
-    console_log($_POST['email'] . ' ' . $_POST['password'] . ' ' . $_COOKIE['type']);
     $ret = mysqli_query($sql,  "SELECT * FROM users WHERE email='$email' AND password='$password' AND type='$type'");
     $num = mysqli_fetch_array($ret);
 
     if ($num > 0) {
-        console_log("I am in 3");
         $uret = mysqli_query($sql, "SELECT * FROM " . $_COOKIE['type'] . " WHERE email='" . $_POST['email'] . "'");
         $pret = mysqli_query($sql, "UPDATE users SET last_access=current_timestamp() WHERE email='" . $_POST['email'] . "'");
 

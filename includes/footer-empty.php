@@ -32,18 +32,18 @@
     function downloadReport(data) {
         const json_str = JSON.stringify(data);
         console.log(data);
-        // $.ajax({
-        //     contentType : 'application/json',
-        //     url: "/cms/test.php",
-        //     data: 'data=' + data,
-        //     type: "POST",
-        //     success: function(d) {
-        //         console.log(d);
-        //     },
-        //     error: function(e) {
-        //         console.log(e);
-        //     }
-        // });
+        $.ajax({
+            contentType : "application/json; charset=UTF-8",
+            url: "http://localhost:8998/",
+            data: data,
+            type: "POST",
+            success: function(d) {
+                console.log(d);
+            },
+            error: function(e) {
+                console.log(e);
+            }
+        });
     }
 </script>
 </body>
